@@ -1,1 +1,2 @@
 1 - retreive available qualities from youtube.com  
+2 - when save, add filename as suggested file name when browse
