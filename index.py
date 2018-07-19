@@ -21,17 +21,20 @@ class MainApp(QMainWindow, FORM_CLASS):
 
     def Handle_UI(self):
         self.setWindowTitle('Python Download Manger')
-        self.setFixedSize(529, 240)
+        self.setFixedSize(529, 270)
 
     def Handle_Buttons(self):
         self.pushButton.clicked.connect(self.Download)
         self.pushButton_2.clicked.connect(self.Handle_Browse)
+        self.pushButton_3.clicked.connect(self.Handle_Browse)
+        self.pushButton_6.clicked.connect(self.Handle_Browse)
         self.pushButton_4.clicked.connect(self.Download_Youtube_video)
 
     def Handle_Browse(self):
         save_place = QFileDialog.getSaveFileName(self, caption='Save as', directory='.', filter='All Files (*.*)')
         self.lineEdit_2.setText(save_place[0])
-
+        self.lineEdit_4.setText(save_place[0])
+        self.lineEdit_6.setText(save_place[0])
 
     def Handle_Progress(self, blocknum, blocksize, totalsize):
         read = blocknum * blocksize
@@ -53,7 +56,7 @@ class MainApp(QMainWindow, FORM_CLASS):
         # print(v.thumb)
         # print(v.videoid)
         # print(v.viewcount)
-        print(v.allstreams)
+        # print(v.allstreams)
 
     def Download(self):
         url = self.lineEdit.text()

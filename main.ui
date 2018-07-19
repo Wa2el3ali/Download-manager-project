@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>522</width>
-    <height>244</height>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1257,11 +1257,11 @@ QDateEdit::down-arrow:focus {
       <x>10</x>
       <y>0</y>
       <width>501</width>
-      <height>201</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -1646,7 +1646,7 @@ QDateEdit::down-arrow:focus {
      <x>0</x>
      <y>0</y>
      <width>522</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
