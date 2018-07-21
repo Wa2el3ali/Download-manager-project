@@ -8,6 +8,7 @@ import sys
 import urllib.request
 import pafy
 import humanize
+from functools import partial
 
 FORM_CLASS,_ = loadUiType(path.join(path.dirname(__file__), "main.ui"))
 
@@ -27,8 +28,8 @@ class MainApp(QMainWindow, FORM_CLASS):
     def Handle_Buttons(self):
         self.pushButton.clicked.connect(self.Download)
         self.pushButton_2.clicked.connect(self.Handle_Browse)
-        self.pushButton_3.clicked.connect(self.Save_Browse)
-        self.pushButton_6.clicked.connect(self.Save_Browse)
+        self.pushButton_3.clicked.connect(partial(self.Save_Browse, 4))
+        self.pushButton_6.clicked.connect(partial(self.Save_Browse, 6))
         self.pushButton_4.clicked.connect(self.Download_Youtube_video)
         self.pushButton_7.clicked.connect(self.Get_Youtube_video)
         self.pushButton_5.clicked.connect(self.Playlist_download)
@@ -39,12 +40,11 @@ class MainApp(QMainWindow, FORM_CLASS):
 
 
 
-    def Save_Browse(self):
+    def Save_Browse(self, button_number):
         save = QFileDialog.getExistingDirectory(self, "Select Download Directory")
-        self.lineEdit_4.setText(save)
-        self.lineEdit_6.setText(save)
+        exec('self.lineEdit_{}.setText(save)'.format(button_number))
 
-
+        
     def Handle_Progress(self, blocknum, blocksize, totalsize):
         read = blocknum * blocksize
 
