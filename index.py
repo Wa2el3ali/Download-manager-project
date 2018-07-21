@@ -28,9 +28,10 @@ class MainApp(QMainWindow, FORM_CLASS):
         self.pushButton.clicked.connect(self.Download)
         self.pushButton_2.clicked.connect(self.Handle_Browse)
         self.pushButton_3.clicked.connect(self.Save_Browse)
-        self.pushButton_6.clicked.connect(self.Handle_Browse)
+        self.pushButton_6.clicked.connect(self.Save_Browse)
         self.pushButton_4.clicked.connect(self.Download_Youtube_video)
         self.pushButton_7.clicked.connect(self.Get_Youtube_video)
+        self.pushButton_5.clicked.connect(self.Playlist_download)
 
     def Handle_Browse(self):
         save_place = QFileDialog.getSaveFileName(self, caption='Save as', directory='.', filter='All Files (*.*)')
@@ -41,6 +42,8 @@ class MainApp(QMainWindow, FORM_CLASS):
     def Save_Browse(self):
         save = QFileDialog.getExistingDirectory(self, "Select Download Directory")
         self.lineEdit_4.setText(save)
+        self.lineEdit_6.setText(save)
+
 
     def Handle_Progress(self, blocknum, blocksize, totalsize):
         read = blocknum * blocksize
@@ -84,6 +87,27 @@ class MainApp(QMainWindow, FORM_CLASS):
             return
 
         QMessageBox.information(self, 'Download Completed', 'The Video Download is Finished')
+
+
+    def Playlist_download(self):
+        playlist_url = self.lineEdit_7.text()
+        save_location = self.lineEdit_6.text()
+        playlist = pafy.get_playlist(playlist_url)
+        videos = playlist['items']
+
+        os.chdir(save_location)
+        if os.path.exists(save_location):
+            os.chdir(save_location)
+        else:
+            os.mkdir(str(playlist['title']))
+            os.chdir(str(playlist['title']))
+
+        for video in videos:
+            p = video['pafy']
+            best = p.getbest(preftype='mp4')
+            best.download()
+
+
 
 
     def Download(self):
